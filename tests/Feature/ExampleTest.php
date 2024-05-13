@@ -26,14 +26,13 @@ class ExampleTest extends TestCase
         $this->assertAuthenticated($guard = null);
     }
 
-    //exemplo de Teste de Views
-    /*public function test_a_homepage_view_can_be_rendered()
-    {
-        $view = $this->view('welcome', ['name' => 'Taylor']);
  
-        $view->assertSee('Taylor');
+    public function test_homepage_view_can_be_rendered()
+    {
+        $view = $this->view('home', ['name' => 'João']);
+ 
+        $view->assertSee('João');
     }
-    */
 
     //exemplo de Teste de API
     /*public function test_making_an_api_request()
