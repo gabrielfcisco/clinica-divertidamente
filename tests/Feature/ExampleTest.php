@@ -26,10 +26,30 @@ class ExampleTest extends TestCase
         $this->assertAuthenticated($guard = null);
     }
 
- 
-    public function test_homepage_view_can_be_rendered()
+    public function test_crud_secretaria_view_can_be_rendered()
     {
-        $view = $this->view('home', ['name' => 'João']);
+        $view = $this->view('crud_secretaria', ['name' => 'João']);
+ 
+        $view->assertSee('João');
+    }
+
+    public function test_login_view_can_be_rendered()
+    {
+        $view = $this->view('login', ['name' => 'João']);
+ 
+        $view->assertSee('João');
+    }
+
+    public function test_crud_psicologo_view_can_be_rendered()
+    {
+        $view = $this->view('crud_psicologo', ['name' => 'João']);
+ 
+        $view->assertSee('João');
+    }
+
+    public function test_crud_paciente_view_can_be_rendered()
+    {
+        $view = $this->view('crud_paciente', ['name' => 'João']);
  
         $view->assertSee('João');
     }
