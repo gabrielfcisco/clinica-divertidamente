@@ -44,4 +44,31 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Interact with the user's first name.
+     *
+     * @param  string  $value
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+
+     protected function type(): Attribute
+     {
+         return new Attribute(
+             get: fn ($value) =>  ["cliente", "psicologa", "secretaria", "administrador"][$value],
+         );
+     }
+ 
+     public function cliente(){
+         return $this->hasOne(Cliente::class);
+     }
+ 
+     public function psicologa(){
+         return $this->hasOne(Psicologa::class);
+     }
+
+     public function secretaria(){
+        return $this->hasOne(Secretaria::class);
+    }
+
 }
