@@ -15,8 +15,11 @@ RUN apt-get clean all && apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    nodejs \
     npm
+
+#Install Node.js LTS
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
+    apt-get install -y nodejs
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -32,14 +35,10 @@ RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
-#Install node packages
-#RUN mkdir /npm && chmod a+rwx /npm
-
-USER $user
-ENV PATH="$PATH:/home/dev/.local/npm/bin"
-RUN npm install
+#Upgrade npm package
+RUN npm install -g npm@latest
 
 # Set working directory
 WORKDIR /var/www
 
-#USER $user
+USER $user
