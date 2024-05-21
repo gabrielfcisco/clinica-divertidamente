@@ -15,8 +15,11 @@ RUN apt-get clean all && apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    nodejs \
     npm
+
+#Install Node.js LTS
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
+    apt-get install -y nodejs
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -40,4 +43,4 @@ RUN pecl install -o -f redis \
 # Set working directory
 WORKDIR /var/www
 
-#USER $user
+USER $user
