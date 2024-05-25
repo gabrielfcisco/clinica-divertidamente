@@ -4,8 +4,6 @@ FROM php:8.3.7RC1-fpm-bullseye
 ARG user
 ARG uid
 
-EXPOSE 80 5173
-
 USER root
 
 # Install system dependencies
@@ -16,12 +14,12 @@ RUN apt-get clean all && apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    npm
+    unzip
+    # npm
 
 #Install Node.js LTS
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
-    apt-get install -y nodejs
+# RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
+    # apt-get install -y nodejs
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -38,9 +36,11 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 #Upgrade npm package
-RUN npm install -g npm@latest
+# RUN npm install -g npm@latest
+
 
 # Set working directory
 WORKDIR /var/www
+
 
 USER $user

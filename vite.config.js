@@ -25,7 +25,17 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": "/resources/js",
-            vue: "vue/dist/vue.esm-bundler.js",
+            // vue: "vue/dist/vue.esm-bundler.js",
+        },
+    },
+
+    server: {
+        host: '0.0.0.0',
+        watch: {
+            usePolling: true,
+        },
+        cors: {
+            origin: '*',
         },
     },
 });
