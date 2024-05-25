@@ -4,6 +4,8 @@ FROM php:8.3.7RC1-fpm-bullseye
 ARG user
 ARG uid
 
+EXPOSE 80 5173
+
 USER root
 
 # Install system dependencies
