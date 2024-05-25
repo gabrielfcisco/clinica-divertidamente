@@ -4,6 +4,8 @@ FROM php:8.2.0RC1-fpm-buster
 ARG user
 ARG uid
 
+EXPOSE 80 5173
+
 USER root
 
 # Install system dependencies
