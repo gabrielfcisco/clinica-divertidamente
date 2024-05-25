@@ -26,14 +26,15 @@ spec:
     spec:
       containers:
         - name: app
-          image: laravel
+          image: gabrielfcisco/laravel:latest
           volumeMounts:
             - name: app-storage
               mountPath: /var/www
+          args: ["--user", "laravel", "--uid", "1000"]
       volumes:
         - name: app-storage
           hostPath:
-            path: /
+            path: /home/gabriel/Faculdade/desenvolvimento_apps/clinica-divertidamente
 ---
 apiVersion: v1
 kind: Service
@@ -79,7 +80,7 @@ spec:
       volumes:
         - name: mysql-storage
           hostPath:
-            path: /.docker/mysql/data
+            path: /home/gabriel/Faculdade/desenvolvimento_apps/clinica-divertidamente/.docker/mysql/data
 ---
 apiVersion: v1
 kind: Service
