@@ -3,21 +3,11 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 import axios from 'axios';
 
-defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
+const props = defineProps({
+    canLogin: Boolean,
+    canRegister: Boolean,
+    laravelVersion: String,
+    phpVersion: String,
 });
 
 const email = ref('');
