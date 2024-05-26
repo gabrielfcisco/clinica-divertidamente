@@ -12,8 +12,8 @@ class Secretaria extends Model
     protected $table = "secretarias";
 
     protected $fillable = [
-        'Nome',
-        'Sobrenome',
+        'nome',
+        'sobrenome',
         'user_id',
     ];
 

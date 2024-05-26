@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Secretaria>
@@ -17,7 +18,9 @@ class SecretariaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nome' => fake()->firstName(),
+            'sobrenome' => fake()->lastName(),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }
