@@ -43,6 +43,11 @@ php artisan key:generate
 ```
 
 
+Faça o Migrate
+```sh
+php artisan migrate --seed
+```
+
 Acesse o projeto
 [http://localhost:8080](http://localhost:8080)
 
