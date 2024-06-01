@@ -15,8 +15,8 @@
                   </ul>
               </div>
               <div>
-                  <label for="nome" class="block text-gray-700 font-semibold">Nome Completo</label>
-                  <input v-model="form.nome" type="text" id="nome" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                  <label for="full_name" class="block text-gray-700 font-semibold">Nome Completo</label>
+                  <input v-model="form.full_name" type="text" id="full_name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
               </div>
               <div>
                   <label for="cep" class="block text-gray-700 font-semibold">CEP</label>
@@ -39,8 +39,8 @@
                   <input v-model="form.estado" type="text" id="estado" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" readonly required>
               </div>
               <div>
-                  <label for="telefone" class="block text-gray-700 font-semibold">Número de Celular (WhatsApp)</label>
-                  <input v-model="form.telefone" type="text" id="telefone" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                  <label for="phone" class="block text-gray-700 font-semibold">Número de Celular (WhatsApp)</label>
+                  <input v-model="form.phone" type="text" id="phone" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
               </div>
               <div>
                   <label for="email" class="block text-gray-700 font-semibold">Email</label>

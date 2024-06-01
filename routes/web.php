@@ -109,3 +109,11 @@ Route::get('/patient-detail/{patientsId}', function () {
 Route::put('appointments/{id}/note', [AppointmentController::class, 'updateNote']);
 
 Route::get('/patients/{id}/sessions', [AppointmentController::class, 'patientSessions']);
+
+Route::get('/encaminhamento', function () {
+    return inertia('Encaminhamento');
+})->name('encaminhamento')->middleware('role:psicologo');
+
+Route::get('/atestado', function () {
+    return inertia('Atestado');
+})->name('patient.list')->middleware('role:psicologo');
