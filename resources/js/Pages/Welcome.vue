@@ -59,9 +59,7 @@ function handleImageError() {
                     <a href="#depoimentos" class="hover:text-gray-600">Depoimentos</a>
                     <template v-if="canLogin">
                         <template v-if="$page.props.auth.user">
-                            <a v-if="$page.props.auth.user.role === 'secretaria'" href="/dashboard" class="btn btn-primary">Dashboard</a>
-                            <a v-else-if="$page.props.auth.user.role === 'patient'" href="/patient" class="btn btn-primary">Patient</a>
-                            <a v-else-if="$page.props.auth.user.role === 'psicologo'" href="/psicologo" class="btn btn-primary">Psicólogo</a>
+                            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
                         </template>
                         <template v-else>
                             <a href="/login" class="btn btn-secondary">Log in</a>
