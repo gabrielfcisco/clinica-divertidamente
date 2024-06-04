@@ -57,13 +57,13 @@ function handleImageError() {
                     <a href="#servicos" class="hover:text-gray-600">Serviços</a>
                     <a href="#sobre" class="hover:text-gray-600">Sobre</a>
                     <a href="#depoimentos" class="hover:text-gray-600">Depoimentos</a>
+                    <a href="#email de contato" class="hover:text-gray-600">Entre em Contato</a>
                     <template v-if="canLogin">
                         <template v-if="$page.props.auth.user">
                             <a href="/dashboard" class="btn btn-primary">Dashboard</a>
                         </template>
                         <template v-else>
                             <a href="/login" class="btn btn-secondary">Log in</a>
-                            <a v-if="canRegister" href="/register" class="btn btn-secondary">Register</a>
                         </template>
                     </template>
                 </div>
@@ -137,7 +137,7 @@ function handleImageError() {
                     </div>
                 </section>
                 <!-- Formulário de Envio de Email -->
-                <section class="mt-8 w-full">
+                <section id="email de contato" class="mt-8 w-full">
                     <h2 class="text-2xl font-semibold mb-4">Entre em contado</h2>
                     <form @submit.prevent="sendEmail" class="space-y-4 w-full">
                         <div class="w-full">
@@ -166,7 +166,7 @@ function handleImageError() {
                     <div>
                         <h2 class="text-2xl font-semibold mb-4">Informações de Contato</h2>
                         <ul class="space-y-2">
-                            <li><strong>Telefone:</strong> (XX) XXXX-XXXX</li>
+                            <li><strong>Telefone:</strong> (19) 2283-4673</li>
                             <li><strong>E-mail:</strong> contato@clinicapsicologia.com</li>
                             <li><strong>Endereço:</strong> Rua Nome da Rua, Número - Bairro, Cidade, Estado</li>
                         </ul>

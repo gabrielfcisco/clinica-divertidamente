@@ -122,4 +122,18 @@ class AppointmentController extends Controller
         return response()->json($sessions);
     }
     // Métodos index, create, edit, update, destroy permanecem os mesmos...
+    public function checkAvailability(Request $request)
+    {
+        $psicologoId = $request->input('psicologoId');
+        $date = $request->input('date');
+        $time = $request->input('time');
+
+        // Verifique se existe algum compromisso agendado para o psicólogo na data e hora especificadas
+        $isAvailable = !Appointment::where('psicologo_id', $psicologoId)
+            ->where('date', $date)
+            ->where('time', $time)
+            ->exists();
+
+        return response()->json(['available' => $isAvailable]);
+    }
 }

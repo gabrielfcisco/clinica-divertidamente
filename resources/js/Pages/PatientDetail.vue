@@ -33,6 +33,7 @@
                   <div>
                     <p class="text-gray-700">Data: {{ session.date }}</p>
                     <p class="text-gray-700">Hora: {{ formatTime(session.time) }}</p>
+                    <p class="text-gray-700">Psicologo: {{ getPsychologistName(session.psicologo_id) }}</p>
                     <!-- Exibir a nota -->
                     <p class="text-gray-700">Nota: {{ session.note }}</p>
                   </div>
@@ -58,8 +59,8 @@ import { ref, onMounted } from 'vue';
 
 const patient = ref(null);
 const sessions = ref([]);
+const psicologos = ref([]); // Adicione uma variável de referência para armazenar os psicólogos
 
-// Obtenção do ID do paciente da URL
 const id = window.location.pathname.split('/').pop();
 
 const fetchPatient = async () => {
@@ -71,7 +72,7 @@ const fetchPatient = async () => {
   try {
     const response = await axios.get(`/patients/${id}/info`);
     patient.value = response.data;
-    fetchSessions(); // Após buscar o paciente, buscar as sessões associadas
+    fetchSessions();
   } catch (error) {
     console.error('Erro ao buscar paciente:', error);
   }
@@ -80,13 +81,24 @@ const fetchPatient = async () => {
 const fetchSessions = async () => {
   try {
     const response = await axios.get(`/patients/${id}/sessions`);
-    // Adicione uma nova propriedade 'newNote' para cada sessão
     sessions.value = response.data.map(session => ({
       ...session,
       newNote: ''
     }));
+
+    // Após buscar as sessões, obtenha os detalhes do psicólogo associado a cada sessão
+    fetchPsychologists();
   } catch (error) {
     console.error('Erro ao buscar sessões:', error);
+  }
+};
+
+const fetchPsychologists = async () => {
+  try {
+    const response = await axios.get('/api/psicologos');
+    psicologos.value = response.data;
+  } catch (error) {
+    console.error('Erro ao buscar psicólogos:', error);
   }
 };
 
@@ -94,8 +106,8 @@ const updateNote = async (session) => {
   try {
     await axios.put(`/appointments/${session.id}/note`, { note: session.newNote });
     console.log('Nota adicionada com sucesso');
-    session.note = session.newNote !== '' ? session.newNote : null; // Atualize a nota para a nova nota ou null se estiver vazia
-    session.newNote = ''; // Limpe o campo de entrada de texto para a nova nota após adicionar
+    session.note = session.newNote !== '' ? session.newNote : null;
+    session.newNote = '';
   } catch (error) {
     console.error('Erro ao adicionar nota:', error);
   }
@@ -104,6 +116,11 @@ const updateNote = async (session) => {
 const formatTime = (time) => {
   const [hour, minute] = time.split(':');
   return `${hour}:${minute}`;
+};
+
+const getPsychologistName = (psychologistId) => {
+  const psychologist = psicologos.value.find(psychologist => psychologist.id === psychologistId);
+  return psychologist ? psychologist.full_name : 'Psicólogo não encontrado';
 };
 
 onMounted(() => {
