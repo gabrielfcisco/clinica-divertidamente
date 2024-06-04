@@ -117,3 +117,5 @@ Route::get('/encaminhamento', function () {
 Route::get('/atestado', function () {
     return inertia('Atestado');
 })->name('patient.list')->middleware('role:psicologo');
+
+Route::get('/checkAvailability', [AppointmentController::class, 'checkAvailability']);

@@ -7,9 +7,41 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
+import { onMounted } from 'vue';
+import axios from 'axios';
 
 const showingNavigationDropdown = ref(false);
 const form = useForm({});
+
+const patients = ref([]);
+
+const fetchPatients = async () => {
+    try {
+        const response = await axios.get('/api/patients');
+        patients.value = response.data;
+    } catch (error) {
+        console.error('Erro ao buscar pacientes:', error);
+    }
+};
+
+onMounted(() => {
+    fetchPatients();
+});
+
+const psicologos = ref([]);
+
+const fetchPsychologists = async () => {
+  try {
+    const response = await axios.get('/api/psicologos');
+    psicologos.value = response.data;
+  } catch (error) {
+    console.error('Erro ao buscar psicólogos:', error);
+  }
+};
+
+onMounted(() => {
+  fetchPsychologists();
+});
 </script>
 
 <template>
@@ -29,9 +61,27 @@ const form = useForm({});
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
+                                <template v-if="$page.props.auth.user">
+                                    <template v-if="$page.props.auth.user.role === 'secretaria'">
+                                        <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                            Dashboard
+                                        </NavLink>
+                                    </template>
+                                    <template v-else-if="$page.props.auth.user.role === 'patient'">
+                                        <template v-for="patient in patients" :key="patient.id">
+                                            <NavLink :href="route('patient.index2', { id: patient.id })" :active="route().current('patient.index2')">
+                                                Patient
+                                            </NavLink>
+                                        </template>
+                                    </template>
+                                    <template v-else-if="$page.props.auth.user.role === 'psicologo'">
+                                        <template v-for="psicologo in psicologos" :key="psicologo.id">
+                                            <NavLink :href="route('psychologist.index2', { id: psicologo.id })" :active="route().current('psychologist.index2')">
+                                                Psychologist
+                                            </NavLink>
+                                        </template>
+                                    </template>
+                                </template>
                             </div>
                         </div>
 
@@ -75,9 +125,27 @@ const form = useForm({});
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
+                        <template v-if="$page.props.auth.user">
+                            <template v-if="$page.props.auth.user.role === 'secretaria'">
+                                <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Dashboard
+                                </ResponsiveNavLink>
+                            </template>
+                            <template v-else-if="$page.props.auth.user.role === 'patient'">
+                                <template v-for="patient in patients" :key="patient.id">
+                                    <ResponsiveNavLink :href="route('patient.index2', { id: patient.id })" :active="route().current('patient.index2')">
+                                        Patient
+                                    </ResponsiveNavLink>
+                                </template>
+                            </template>
+                            <template v-else-if="$page.props.auth.user.role === 'psicologo'">
+                                <template v-for="psicologo in psicologos" :key="psicologo.id">
+                                    <ResponsiveNavLink :href="route('psychologist.index2', { id: psicologo.id })" :active="route().current('psychologist.index2')">
+                                        Psychologist
+                                    </ResponsiveNavLink>
+                                </template>
+                            </template>
+                        </template>
                     </div>
 
                     <!-- Responsive Settings Options -->

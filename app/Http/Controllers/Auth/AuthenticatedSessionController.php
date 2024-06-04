@@ -82,6 +82,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->intended(RouteServiceProvider::INICIO);
+        return redirect()->intended('/login');
     }
 }
