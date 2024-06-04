@@ -18,19 +18,19 @@ services:
         networks:
             - mynetwork
 
-  mysql:
-    image: mysql:8.0.30
-    container_name: mysql
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - ./.docker/mysql/data:/var/lib/mysql
-    networks:
-      - mynetwork
+    mysql:
+        image: mysql:8.0.30
+        container_name: mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./.docker/mysql/data:/var/lib/mysql
+        networks:
+            - mynetwork
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -67,12 +67,6 @@ services:
         networks:
             - mynetwork
 
-  redis:
-    container_name: redis
-    image: redis:latest
-    networks:
-      - mynetwork
-
 networks:
-  mynetwork:
-    driver: bridge
+    mynetwork:
+        driver: bridge
